@@ -7,8 +7,8 @@ class User < ApplicationRecord
   has_many :deaths, dependent: :destroy
   has_many :collected_coins, dependent: :destroy
   has_many :killed_monsters, dependent: :destroy
-  has_many :monsters, through: :killed_monsters
   has_many :trophy_users, dependent: :destroy
-
+  
+  has_many :monsters, through: :killed_monsters
   has_many :trophies, through: :trophy_users
 end
