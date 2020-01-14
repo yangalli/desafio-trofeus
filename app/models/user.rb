@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  # Devise
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,4 +12,16 @@ class User < ApplicationRecord
   
   has_many :monsters, through: :killed_monsters
   has_many :trophies, through: :trophy_users
+
+  def all_collected_coins
+    collected_coins.sum(:value)
+  end
+
+  def all_killed_monsters
+    monsters.count
+  end
+
+  def all_times_of_deaths
+    deaths.count
+  end
 end
