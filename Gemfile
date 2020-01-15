@@ -37,20 +37,19 @@ gem 'devise'
 gem 'rails_admin', '~> 2.0'
 gem 'rails_admin_rollincode', '~> 1.0'
 
-# Func -> Verificação de como está o banco
-gem 'erd'
-
 # Func -> Spinner do terminal para tasks
 gem 'tty-spinner'
 
 # Func -> print mais organizado no terminal 
 gem 'awesome_print'
 
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.9'
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers'
+  gem 'faker'
 end
 
 group :development do

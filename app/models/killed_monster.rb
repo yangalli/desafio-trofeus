@@ -1,9 +1,11 @@
 class KilledMonster < ApplicationRecord
+  # Associations
   belongs_to :user
   belongs_to :monster
 
   after_create :user_receive_trophy
 
+  # Methods
   private
 
   def user_receive_trophy
