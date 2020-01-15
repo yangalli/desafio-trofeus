@@ -7,9 +7,14 @@ RSpec.describe User, type: :model do
   end
 
   context 'Associations' do
-    it { is_expected.to have_many(:collected_coins) }
     it { is_expected.to have_many(:deaths) }
+    it { is_expected.to have_many(:collected_coins) }
     it { is_expected.to have_many(:killed_monsters) }
-    it { is_expected.to have_many(:monsters) }
+    it { is_expected.to have_many(:trophy_users) }
+    
+    context 'through' do
+      it { is_expected.to have_many(:monsters).through(:killed_monsters) }
+      it { is_expected.to have_many(:trophies).through(:trophy_users) }
+    end
   end
 end

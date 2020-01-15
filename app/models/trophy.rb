@@ -10,5 +10,5 @@ class Trophy < ApplicationRecord
   validates_associated :trophy_users, :users
   validates :value, presence: true, numericality: { only_integer: true, 
     less_than_or_equal_to: 100000 }
-  validates :trophy_category, presence: true
+  validates :trophy_category, presence: true, inclusion: { in: trophy_categories.keys }
 end
