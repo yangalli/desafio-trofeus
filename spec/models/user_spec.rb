@@ -9,5 +9,7 @@ RSpec.describe User, type: :model do
   context 'Associations' do
     it { is_expected.to have_many(:collected_coins) }
     it { is_expected.to have_many(:deaths) }
+    it { is_expected.to have_many(:killed_monsters) }
+    it { is_expected.to have_many(:monsters) }
   end
 end

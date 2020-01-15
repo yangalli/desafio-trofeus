@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Death, type: :model do
   it 'is valid with user' do
-    collected_coin = create(:collected_coin)
-    expect(collected_coin).to be_valid
+    death = create(:death)
+    expect(death).to be_valid
   end
 
   context 'Associations' do
