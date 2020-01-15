@@ -5,5 +5,5 @@ class Monster < ApplicationRecord
 
   # Validations
   validates_associated :killed_monsters, :users
-  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { in: 2..20 }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { in: 2..25 }
 end

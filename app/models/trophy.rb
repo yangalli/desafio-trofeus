@@ -1,6 +1,6 @@
 class Trophy < ApplicationRecord
   # Trophy Categories
-  enum trophy_category: %i[collected_coins killed_monsters times_of_death]
+  enum trophy_category: { collected_coins: 0, killed_monsters: 1, times_of_death: 2 }
 
   # Associations
   has_many :trophy_users, dependent: :destroy
@@ -10,4 +10,5 @@ class Trophy < ApplicationRecord
   validates_associated :trophy_users, :users
   validates :value, presence: true, numericality: { only_integer: true, 
     less_than_or_equal_to: 100000 }
+  validates :trophy_category, presence: true
 end
