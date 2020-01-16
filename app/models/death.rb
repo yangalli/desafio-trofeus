@@ -1,10 +1,10 @@
 class Death < ApplicationRecord
-  # Associations
-  belongs_to :user
+  # associations
+  belongs_to :user, counter_cache: true
 
   after_create :user_receive_trophy
   
-  # Methods
+  # methods
   private
 
   def user_receive_trophy

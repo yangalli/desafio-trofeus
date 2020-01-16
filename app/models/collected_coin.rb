@@ -1,14 +1,14 @@
 class CollectedCoin < ApplicationRecord
-  # Associations
-  belongs_to :user
+  # associations
+  belongs_to :user, counter_cache: true
 
-  # Validations
+  # validations
   validates :value, presence: true, numericality: { only_integer: true, 
     less_than_or_equal_to: 100000 }
 
   after_create :user_receive_trophy
 
-  # Methods
+  # methods
   private
   
   def user_receive_trophy

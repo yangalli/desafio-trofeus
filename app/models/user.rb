@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-  # Devise
+  # devise
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
-  # Associations
+  # associations
   has_many :deaths, dependent: :destroy
   has_many :collected_coins, dependent: :destroy
   has_many :killed_monsters, dependent: :destroy
@@ -12,11 +12,11 @@ class User < ApplicationRecord
   has_many :monsters, through: :killed_monsters
   has_many :trophies, through: :trophy_users
 
-  # Validations
+  # validations
   validates_associated :deaths, :collected_coins, :killed_monsters, 
     :trophy_users, :monsters, :trophies  
 
-  # Methods
+  # methods
   def all_collected_coins
     collected_coins.sum(:value)
   end

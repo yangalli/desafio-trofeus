@@ -1,5 +1,5 @@
 class TrophyUser < ApplicationRecord
-  # Associations
+  # associations
   belongs_to :user
   belongs_to :trophy
 end

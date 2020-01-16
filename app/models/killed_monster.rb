@@ -1,11 +1,11 @@
 class KilledMonster < ApplicationRecord
-  # Associations
-  belongs_to :user
+  # associations
+  belongs_to :user, counter_cache: true
   belongs_to :monster
 
   after_create :user_receive_trophy
 
-  # Methods
+  # methods
   private
 
   def user_receive_trophy
