@@ -6,22 +6,28 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# collected_coins
 [1, 100, 1000, 10000, 100000].each do |value|
   Trophy.find_or_create_by!(trophy_category: 0, value: value)
 end
 
+# killed_monsters 
+: 3, : 4
 [1, 100, 1000, 10000, 100000].each do |value|
   Trophy.find_or_create_by!(trophy_category: 1, value: value)
 end
 
+# times_of_death
 [1, 10, 25, 50, 100].each do |value|
   Trophy.find_or_create_by!(trophy_category: 2, value: value)
 end
 
+# killed_turtles
 [1, 100, 1000, 10000, 100000].each do |value|
   Trophy.find_or_create_by!(trophy_category: 3, value: value)
 end
 
+# killed_bowsers
 [1, 100, 1000, 10000, 100000].each do |value|
   Trophy.find_or_create_by!(trophy_category: 4, value: value)
 end
