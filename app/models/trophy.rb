@@ -1,6 +1,7 @@
 class Trophy < ApplicationRecord
   # trophy categories
-  enum trophy_category: { collected_coins: 0, killed_monsters: 1, times_of_death: 2 }
+  enum trophy_category: { collected_coins: 0, killed_monsters: 1, times_of_death: 2, 
+    killed_bowsers: 3, killed_turtles: 4  }
 
   # associations
   has_many :trophy_users, dependent: :destroy

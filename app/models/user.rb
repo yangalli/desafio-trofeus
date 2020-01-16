@@ -25,6 +25,14 @@ class User < ApplicationRecord
     monsters.count
   end
 
+  def all_killed_turtles
+    monsters.where(name: 'turtle').count
+  end
+
+  def all_killed_bowsers
+    monsters.where(name: 'bowser').count
+  end
+
   def all_times_of_deaths
     deaths.count
   end
