@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Trophy, type: :model do
   it 'is valid with value and trophy_category' do
-    trophy = create(:trophy)
+    trophy = build(:trophy)
     expect(trophy).to be_valid
   end
 
@@ -19,23 +19,21 @@ RSpec.describe Trophy, type: :model do
   end
 
   context 'Methods' do
-    context '#creates' do
-      it 'collected_coin trophies' do
-        for n in [1, 100, 1000, 10000, 10000]
-          coin_trophy[n] = create(:coin_trophy, value: n)
+    describe '#create' do
+      context 'when creating' do
+        it 'creates collected_coins trophy' do
+          coin_trophy = create(:coin_trophy)
+          expect(Trophy.all).to include(coin_trophy)
         end
-        expect(Trophy.all).to include(coin_trophy[n]).in_array[coin_trophy[n]]
-      end
-  
-      context 'Deaths' do
-        it 'creates deaths trophies' do
-          
+        
+        it 'creates killed_monsters trophy' do
+          monster_trophy = create(:monster_trophy)
+          expect(Trophy.all).to include(monster_trophy)
         end
-      end
   
-      context 'Killed Monsters' do
-        it 'creates killed monsters trophies' do
-          
+        it 'creates times_of_death trophy' do
+          death_trophy = create(:death_trophy)
+          expect(Trophy.all).to include(death_trophy)
         end
       end
     end

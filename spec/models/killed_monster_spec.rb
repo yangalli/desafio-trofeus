@@ -12,35 +12,29 @@ RSpec.describe KilledMonster, type: :model do
   end
 
   context 'Methods' do
-    let(:user) { create(:user) }
-    
-    before(:each) do
-      load "#{Rails.root}/db/seeds.rb" 
-    end
-
-    it 'creates a killed_monster trophy' do
-      monster_trophy = build(:monster_trophy, value: 1)
-      expect(monster_trophy).to be_valid
-    end
-
-    it 'rewards a user with a killed_monster trophy' do
-      monster_trophy = Trophy.where(trophy_category: "killed_monsters").find_by(value: 1)
-      create(:killed_monster, user: user)
+    describe '#user_receive_trophy' do
+      let(:user) { create(:user) }
       
-      user.reload
-  
-      expect(user.trophies).to include(monster_trophy)
-    end
+      before(:each) do
+        load "#{Rails.root}/db/seeds.rb" 
+      end
 
-    it 'rewards a user only with the correct killed_monster trophy' do
-      monster_trophy1 = Trophy.where(trophy_category: "killed_monsters").find_by(value: 1)
-      monster_trophy2 = Trophy.where(trophy_category: "killed_monsters").find_by(value: 100)
-      create_list(:killed_monster, 2, user: user)
-      
-      user.reload
-  
-      expect(user.trophies).to include(monster_trophy1) 
-      expect(user.trophies).not_to include(monster_trophy2)
+      context 'when user reaches a killed_monster trophy value' do
+        it 'rewards a user with a killed_monster trophy' do
+          monster_trophy = Trophy.where(trophy_category: "killed_monsters").find_by(value: 1)
+          create(:killed_monster, user: user)
+          user.reload
+          expect(user.trophies).to include(monster_trophy)
+        end
+
+        it 'rewards the user only with the correct killed_monster trophy' do
+          monster_trophy1 = Trophy.where(trophy_category: "killed_monsters").find_by(value: 1)
+          monster_trophy2 = Trophy.where(trophy_category: "killed_monsters").find_by(value: 100)
+          create_list(:killed_monster, 2, user: user)          
+          user.reload
+          expect(user.trophies).not_to include(monster_trophy2)
+        end
+      end
     end
   end
 end
