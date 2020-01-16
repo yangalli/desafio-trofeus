@@ -42,6 +42,20 @@ namespace :dev do
     end
   end
 
+  desc "Creating Turtle Trophies"
+  task add_bowser_trophies: :environment do
+    [1, 100, 1000, 10000, 100000].each do |value|
+      Trophy.find_or_create_by!(trophy_category: 3, value: value)
+    end
+  end
+
+  desc "Creating Bowser Trophies"
+  task add_bowser_trophies: :environment do
+    [1, 100, 1000, 10000, 100000].each do |value|
+      Trophy.find_or_create_by!(trophy_category: 4, value: value)
+    end
+  end
+
   private
 
     def show_spinner(msg_start, msg_end = "Concluído!")
