@@ -1,5 +1,4 @@
 namespace :dev do
-
   desc "Configurar o ambiente de desenvolvimento"
   task setup: :environment do
     unless Rails.env.production?

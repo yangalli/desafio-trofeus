@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :trophy_user do
     trophy
-    user
+    user 
   end
 end

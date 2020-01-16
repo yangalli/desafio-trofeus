@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CollectedCoin, type: :model do
   it 'is valid with value and user' do
-    collected_coin = create(:collected_coin)
+    collected_coin = build(:collected_coin)
     expect(collected_coin).to be_valid
   end
 
@@ -17,6 +17,35 @@ RSpec.describe CollectedCoin, type: :model do
   end
 
   context 'Methods' do
+    let(:user) { create(:user) }
     
+    before(:each) do
+      load "#{Rails.root}/db/seeds.rb" 
+    end
+
+    it 'builds a collected_coin trophy' do
+      coin_trophy = build(:coin_trophy, value: 1)
+      expect(coin_trophy).to be_valid
+    end
+
+    it 'rewards a user with a collected_coin trophy' do
+      coin_trophy = Trophy.where(trophy_category: "collected_coins").find_by(value: 1)
+      create(:collected_coin, value: 100, user: user)
+      
+      user.reload
+      p user.trophies.size
+  
+      expect(user.trophies).to include(coin_trophy)
+    end
+
+    it 'rewards a user with the correct collected_coin trophy' do
+      coin_trophy1 = Trophy.where(trophy_category: "collected_coins").find_by(value: 1)
+      coin_trophy2 = Trophy.where(trophy_category: "collected_coins").find_by(value: 100)
+      create(:collected_coin, value: 10, user: user)
+
+      user.reload
+
+      expect(user.trophies).to include(coin_trophy1)
+    end
   end
 end
