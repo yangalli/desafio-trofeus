@@ -5,28 +5,19 @@ class KilledMonster < ApplicationRecord
   belongs_to :user, counter_cache: true
   belongs_to :monster
 
+  # class variables
+  @@monsters_type = %w(killed_monsters killed_turtles killed_bowsers)
+
   after_create :receive_monster_trophy
-  after_create :receive_turtle_trophy
-  after_create :receive_bowser_trophy
 
   # methods
   private
 
   def receive_monster_trophy
-    send_trophy('killed_monsters').find_each do |trophy|
-      define_monster_trophy?(trophy) ? TrophyUser.create!(user: user, trophy: trophy) : next
-    end
-  end
-
-  def receive_turtle_trophy
-    send_trophy('killed_turtles').find_each do |trophy|
-      define_turtle_trophy?(trophy) ? TrophyUser.create!(user: user, trophy: trophy) : next
-    end
-  end
-
-  def receive_bowser_trophy
-    send_trophy('killed_bowsers').find_each do |trophy|
-      define_bowser_trophy?(trophy) ? TrophyUser.create!(user: user, trophy: trophy) : next
+    @@monsters_type.each do |monster_type|
+      send_trophy(monster_type).find_each do |trophy|
+        define_monster_trophy?(trophy, monster_type) ? TrophyUser.create!(user: user, trophy: trophy) : next
+      end
     end
   end
 
@@ -34,15 +25,7 @@ class KilledMonster < ApplicationRecord
     Trophy.send(trophy_category)
   end
 
-  def define_monster_trophy?(trophy)
-    'killed_monsters' ? !user.trophies.include?(trophy) && user.all_killed_monsters >= trophy.value : false
-  end
-
-  def define_turtle_trophy?(trophy)
-    'killed_turtles' ? !user.trophies.include?(trophy) && user.all_killed_turtles >= trophy.value : false
-  end
-
-  def define_bowser_trophy?(trophy)
-    'killed_bowsers' ? !user.trophies.include?(trophy) && user.all_killed_bowsers >= trophy.value : false
+  def define_monster_trophy?(trophy, trophy_category)
+    !user.trophies.include?(trophy) && user.send("all_#{trophy_category}") >= trophy.value
   end
 end

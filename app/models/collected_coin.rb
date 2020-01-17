@@ -20,6 +20,6 @@ class CollectedCoin < ApplicationRecord
   end
 
   def define_trophy?(trophy)
-    'collected_coins' ? !user.trophies.include?(trophy) && user.all_collected_coins >= trophy.value : false
+    !user.trophies.include?(trophy) && user.all_collected_coins >= trophy.value
   end
 end
