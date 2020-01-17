@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :trophy do
     value { 10 }
@@ -6,7 +8,7 @@ FactoryBot.define do
     trait :coin do
       trophy_category { "collected_coins" }
     end
-    
+
     trait :monster do
       trophy_category { "killed_monsters" }
     end

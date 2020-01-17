@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Death < ApplicationRecord
   # associations
   belongs_to :user, counter_cache: true

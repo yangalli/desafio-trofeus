@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # devise
   devise :database_authenticatable, :registerable,
@@ -8,13 +10,13 @@ class User < ApplicationRecord
   has_many :collected_coins, dependent: :destroy
   has_many :killed_monsters, dependent: :destroy
   has_many :trophy_users, dependent: :destroy
-  
+
   has_many :monsters, through: :killed_monsters
   has_many :trophies, through: :trophy_users
 
   # validations
-  validates_associated :deaths, :collected_coins, :killed_monsters, 
-    :trophy_users, :monsters, :trophies  
+  validates_associated :deaths, :collected_coins, :killed_monsters,
+    :trophy_users, :monsters, :trophies
 
   # methods
   def all_collected_coins

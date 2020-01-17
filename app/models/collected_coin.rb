@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class CollectedCoin < ApplicationRecord
   # associations
   belongs_to :user, counter_cache: true
 
   # validations
-  validates :value, presence: true, numericality: { only_integer: true, 
-    less_than_or_equal_to: 100000 }
+  validates :value, presence: true,
+    numericality: { only_integer: true, less_than_or_equal_to: 100_000 }
 
   after_create :user_receive_trophy
 

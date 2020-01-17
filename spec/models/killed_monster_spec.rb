@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe KilledMonster, type: :model do
@@ -6,18 +8,16 @@ RSpec.describe KilledMonster, type: :model do
     expect(killed_monster).to be_valid
   end
 
-  context 'Associations' do
+  context 'when associating' do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:monster) }
   end
 
-  context 'Methods' do
+  context 'when calling methods' do
     describe '#user_receive_trophy' do
       let(:user) { create(:user) }
-      
-      before(:each) do
-        load "#{Rails.root}/db/seeds.rb" 
-      end
+
+      before { load "#{Rails.root}/db/seeds.rb" }
 
       context 'when user reaches a killed_monster trophy value' do
         it 'rewards a user with a killed_monster trophy' do
@@ -28,11 +28,10 @@ RSpec.describe KilledMonster, type: :model do
         end
 
         it 'rewards the user only with the correct killed_monster trophy' do
-          monster_trophy1 = Trophy.where(trophy_category: "killed_monsters").find_by(value: 1)
-          monster_trophy2 = Trophy.where(trophy_category: "killed_monsters").find_by(value: 100)
-          create_list(:killed_monster, 2, user: user)          
+          monster_trophy = Trophy.where(trophy_category: "killed_monsters").find_by(value: 5)
+          create_list(:killed_monster, 4, user: user)
           user.reload
-          expect(user.trophies).not_to include(monster_trophy2)
+          expect(user.trophies).not_to include(monster_trophy)
         end
       end
     end

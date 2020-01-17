@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class KilledMonster < ApplicationRecord
   # associations
   belongs_to :user, counter_cache: true
@@ -30,7 +32,7 @@ class KilledMonster < ApplicationRecord
 
   def send_trophy(trophy_category)
     Trophy.send(trophy_category)
-  end 
+  end
 
   def define_monster_trophy?(trophy)
     'killed_monsters' ? !user.trophies.include?(trophy) && user.all_killed_monsters >= trophy.value : false
