@@ -27,8 +27,12 @@ RSpec/NestedGroups:
   Max: 4
 
 AllCops:
-  TargetRubyVersion: 2.6.5
   Exclude:
     - "bin/*"
-    - "db/migrate/*.rb"
-    - "db/schema.rb"
+    - "lib/**/*.rake"
+    - "node_modules/**/*"
+    - "node_modules/**/**/*"
+    - "db/**"
+    - "db/**/*"
+    - "config/**/*"
+    - "config/*"
