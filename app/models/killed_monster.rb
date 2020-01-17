@@ -6,7 +6,7 @@ class KilledMonster < ApplicationRecord
   belongs_to :monster
 
   # class variables
-  @@monsters_type = %w(killed_monsters killed_turtles killed_bowsers)
+  @@monsters_type = %w[killed_monsters killed_turtles killed_bowsers]
 
   after_create :receive_monster_trophy
 

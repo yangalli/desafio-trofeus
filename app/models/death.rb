@@ -5,7 +5,7 @@ class Death < ApplicationRecord
   belongs_to :user, counter_cache: true
 
   after_create :user_receive_trophy
-  
+
   # methods
   private
 
@@ -16,6 +16,6 @@ class Death < ApplicationRecord
   end
 
   def define_trophy?(trophy)
-    'times_of_death' ? !user.trophies.include?(trophy) && user.all_times_of_deaths >= trophy.value : false
+    !user.trophies.include?(trophy) && user.all_times_of_deaths >= trophy.value
   end
 end

@@ -12,7 +12,7 @@ class CollectedCoin < ApplicationRecord
 
   # methods
   private
-  
+
   def user_receive_trophy
     Trophy.send('collected_coins').find_each do |trophy|
       define_trophy?(trophy) ? TrophyUser.create!(user: user, trophy: trophy) : next
